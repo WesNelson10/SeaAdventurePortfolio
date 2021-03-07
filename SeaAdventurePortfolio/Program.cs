@@ -10,6 +10,15 @@ namespace SeaAdventurePortfolio
     {
         static void Main(string[] args)
         {
+            bool exitAdventure = true;
+
+            Console.Title = "Sea Adventure";
+
+            #region Objects
+            #region Weapons
+            // blah
+            #endregion
+            #endregion
         }
     }
 }
