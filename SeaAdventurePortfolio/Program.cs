@@ -32,14 +32,41 @@ namespace SeaAdventurePortfolio
             PirateOption chosenPirate = new PirateOption();
             bool exitPirateSelection = false;
 
+            Console.WriteLine(@"
+                            ______________________________________________
+       sea               .-'                     _                        '.
+       adventure       .'                       |-'                        |
+                     .'                         |                          |
+                  _.'               p         _\_/_         p              |
+               _.'                  |       .'  |  '.       |              |
+          __..'                     |      /    |    \      |              |
+    ___..'                         .T\    ======+======    /T.             |
+ ;;;\::::                        .' | \  /      |      \  / | '.           |
+ ;;;|::::                      .'   |  \/       |       \/  |   '.         |
+ ;;;/::::                    .'     |   \       |        \  |     '.       |
+       ''.__               .'       |    \      |         \ |       '.     |
+            ''._          <_________|_____>_____|__________>|_________>    |
+                '._     (___________|___________|___________|___________)  |
+                   '.    \;;o;;;o;;;o;;;;;o;;;;;o;;;;;o;;;;;o;;;;;o;;;;/   |
+                     '.~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~   |
+                       '. ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  |
+                         '-.______________________________________________.'
+");
+            Console.WriteLine("Ahoy, scallywag! Enter your name: ");
+            string playerName = Console.ReadLine(); // player's name
+            Console.Clear();
+
             do
             {
-                Console.WriteLine("Selecting a character."); // Pirate selection screen
+                Console.WriteLine($"You wake to the smell of rum and salt.The room is slowly rocking back and forth, and you manage to get up out of the bed.There is a dusty mirror on the opposite wall - you navigate to that mirror.\n ****************\nWhat type of pirate do you see, {playerName}?\n[1] Default Pirate\n" +
+                "[2] Privateer\n" +
+                "[3] Corsair\n" +
+                "[4] Buccaneer\n"); // Pirate selection screen
                 ConsoleKey pirateChoice = Console.ReadKey(true).Key;
                 switch (pirateChoice)
                 {
 
-                    case ConsoleKey.D1://Warrior
+                    case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
                         Console.Clear();
                         Console.WriteLine("You see a plain old pirate wiht a love for lootin'.\n");
@@ -47,11 +74,27 @@ namespace SeaAdventurePortfolio
                         exitPirateSelection = true;
                         break;
 
-                    case ConsoleKey.D2://Thief
+                    case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
                         Console.Clear();
                         Console.WriteLine("You have an aptitude for the Caribbean and American Football.\n");
                         chosenPirate = PirateOption.Buccaneer;
+                        exitPirateSelection = true;
+                        break;
+
+                    case ConsoleKey.D3:
+                    case ConsoleKey.NumPad3:
+                        Console.Clear();
+                        Console.WriteLine("A European type pirate stares back at you.\n");
+                        chosenPirate = PirateOption.Corsair;
+                        exitPirateSelection = true;
+                        break;
+
+                    case ConsoleKey.D4:
+                    case ConsoleKey.NumPad4:
+                        Console.Clear();
+                        Console.WriteLine("A professional looking individual smirks at you in the mirrror.\n");
+                        chosenPirate = PirateOption.Privateer;
                         exitPirateSelection = true;
                         break;
 
