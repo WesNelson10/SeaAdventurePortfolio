@@ -54,6 +54,10 @@
       <Project>{9dae9565-e616-496c-b189-dbcb76539fa3}</Project>
       <Name>AdventureLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FoeLibrary\FoeLibrary.csproj">
+      <Project>{24044b1a-a3ad-4a7a-a7d0-33e7587ecfb3}</Project>
+      <Name>FoeLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
