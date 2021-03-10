@@ -9,6 +9,7 @@ namespace AdventureLibrary
         public PirateOption PirateOption { get; set; }
         public Weapon EquippedWeapon { get; set; }
         public List<Weapon> WeaponInventory { get; set; }
+        public List<OtherObject> OtherInventory { get; set; }
 
         public PlayerPirate(string name, int life, int maxLife, int accuracy, int defense, bool isChat, PirateOption pirateOption, Weapon equippedWeapon, List<Weapon> weaponInventory) : base(name, life, maxLife, accuracy, defense, isChat)
         {
