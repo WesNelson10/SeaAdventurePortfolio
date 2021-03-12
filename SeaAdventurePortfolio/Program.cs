@@ -116,7 +116,7 @@ namespace SeaAdventurePortfolio
                                                 $"\n[2] Chat" +
                                                 $"\n[3] View Your Stats" +
                                                 $"\n[4] View {enemy.Name}'s Stats" +
-                                                $"\n[5] Access Your Inventory");
+                                                $"\n[5] Inventory");
                     ConsoleKey userChoice = Console.ReadKey(true).Key;
                     Console.Clear();
                     switch (userChoice)
@@ -154,16 +154,61 @@ namespace SeaAdventurePortfolio
                         default:
                             break;
                     }
-                } while (player.Life > 0 && !exitScenario);
+                } while (player.Life > 0 && !exitBattle);
 
                 if (!exitAdventure)
                 {
                     //Sea fight goes here
                     do
                     {
-                        //Combat Menu
+                        Foe enemy = kraken;
+                        Display.DisplayPort();
+                        Console.WriteLine("After a long while at sea, you hear a low rumbling in the ocean..."); // TODO add port intro details
+                        Console.WriteLine($"Choose an Action:" +
+                                                    $"\n[1] Attack the {enemy.Name}" +
+                                                    $"\n[2] Chat" +
+                                                    $"\n[3] View Your Stats" +
+                                                    $"\n[4] View {enemy.Name}'s Stats" +
+                                                    $"\n[5] Access Your Inventory");
+                        ConsoleKey userChoice = Console.ReadKey(true).Key;
+                        Console.Clear();
+                        switch (userChoice)
+                        {
+                            case ConsoleKey.D1:
+                            case ConsoleKey.NumPad1:
+                                Combat.Battle(player, kraken);
+                                if (enemy.Life <= 0)
+                                {
+                                    Display.Green($"The {enemy.Name} died!");
+                                    exitBattle = true;
+                                }
+                                break;
 
-                    } while (player.Life > 0 && exitScenario);
+                            case ConsoleKey.D2:
+                            case ConsoleKey.NumPad2:
+                                Console.WriteLine("chatting");
+                                break;
+
+                            case ConsoleKey.D3:
+                            case ConsoleKey.NumPad3:
+                                Console.WriteLine(player);
+                                break;
+
+                            case ConsoleKey.D4:
+                            case ConsoleKey.NumPad4:
+                                Console.WriteLine(enemy);
+                                break;
+
+                            case ConsoleKey.D5:
+                            case ConsoleKey.NumPad5:
+                                Display.ViewPlayerInventory(player);
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                    } while (player.Life > 0 && exitBattle);
                 }
 
                 if (!exitAdventure)
@@ -178,39 +223,7 @@ namespace SeaAdventurePortfolio
 
             } while (!exitAdventure);
             //Closing sequence
-            Console.WriteLine(@"
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMM        MMMMMMMMMMMM 
-MMMMMMMMMM            MMMMMMMMMM
-MMMMMMMMM              MMMMMMMMM
-MMMMMMMM    game        MMMMMMMM
-MMMMMMM       over      MMMMMMMM
-MMMMMMM                  MMMMMMM
-MMMMMMM                  MMMMMMM
-MMMMMMM    MMM    MMM    MMMMMMM
-MMMMMMM   MMMMM   MMMM   MMMMMMM 
-MMMMMMM   MMMMM   MMMM   MMMMMMM
-MMMMMMMM   MMMM M MMMM  MMMMMMMM
-MMVKMMMM        M        MMMMMMM
-MMMMMMMM       MMM      MMMMMMMM
-MMMMMMMMMMMM   MMM  MMMMMMMMMMMM
-MMMMMMMMMM MM       M  MMMMMMMMM
-MMMMMMMMMM  M M M M M MMMMMMMMMM
-MMMM  MMMMM MMMMMMMMM MMMMM   MM
-MMM    MMMM M MMMMM M MMMM    MM
-MMM    MMMM   M M M  MMMMM   MMM
-MMMM    MMMM         MMM      MM
-MMM       MMMM     MMMM       MM
-MMM         MMMMMMMM      M  MMM
-MMMM  MMM      MMM      MMMMMMMM
-MMMMMMMMMMM  MM       MMMMMMM  M
-MMM  MMMMMMM       MMMMMMMMM   M
-MM    MMM        MM            M
-MM            MMMM            MM
-MMM        MMMMMMMMMMMMM       M
-MM      MMMMMMMMMMMMMMMMMMM    M
-MMM   MMMMMMMMMMMMMMMMMMMMMM   M
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+            Display.DeathCard();
 
         }
     }

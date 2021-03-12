@@ -55,7 +55,8 @@ namespace AdventureLibrary
                     }//item select
 
                 } while (!exitType && !exitAll);//exit item select
-                while (viewWeapons)
+
+                while (viewWeapons) // WEAPONS INV
                 {
                     foreach (Weapon weapon in player.WeaponInventory)
                     {
@@ -93,7 +94,7 @@ namespace AdventureLibrary
                     }
                     viewWeapons = false;
                 }
-                while (viewOther)
+                while (viewOther) // OTHER INV
                 {
                     foreach (OtherObject @object in player.OtherInventory)
                     {
@@ -112,16 +113,14 @@ namespace AdventureLibrary
                                 case ConsoleKey.NumPad1:
                                     Console.Clear();
                                     Console.WriteLine($"You examine the {@object.Name}: " +
-                                        $"\n{@object.Description}" +
-                                        $"\n+++++++++++++++++++++++");
+                                        $"\n{@object.Description}");
                                     exitChoice = true;
                                     break;
 
                                 case ConsoleKey.D2:
                                 case ConsoleKey.NumPad2:
                                     Console.Clear();
-                                    Console.WriteLine($"You leave the {@object.Name} in your pack" +
-                                        $"\n+++++++++++++++++++++++");
+                                    Console.WriteLine($"You leave the {@object.Name} in your pack");
                                     exitChoice = true;
                                     break;
 
@@ -133,10 +132,10 @@ namespace AdventureLibrary
                         } while (!exitChoice);
                     }
                     viewOther = false;
-                }
+                } // END OTHER INV
                 exitAll = true;
             } while (!exitAll);
-        }
+        } // method end
         #endregion
 
         #region Text Colors
@@ -171,7 +170,7 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
 
         #region Scenario Objects
 
-        public static void ViewRoomWeaponInventory(List<Weapon> inputInventory, List<Weapon> playerInventory)
+        public static void ViewScenarioWeaponInventory(List<Weapon> inputInventory, List<Weapon> playerInventory)
         {
             bool exitLoop = false;
             do
@@ -233,7 +232,7 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
             } while (!exitLoop);
         }//end
 
-        public static void ViewRoomOtherItemInventory(List<OtherObject> inputInventory, List<OtherObject> playerInventory)
+        public static void ViewScenarioOtherItemInventory(List<OtherObject> inputInventory, List<OtherObject> playerInventory)
         {
             List<OtherObject> itemsToRemove = new List<OtherObject>();
             bool exitLoop = false;
@@ -297,7 +296,7 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
             } while (!exitLoop);
         }
 
-        public static void ViewRoomInventory(PlayerPirate player, Scenario scenario)
+        public static void ViewScenarioInventory(PlayerPirate player, Scenario scenario)
         {
             // Whole Scenario Inventory
             List<Weapon> playerWeapons = player.WeaponInventory;
@@ -306,9 +305,9 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
             List<OtherObject> scenarioOtherItems = scenario.OtherDrop;
 
             Console.Clear();
-            ViewRoomWeaponInventory(scenarioWeapons, playerWeapons);
+            ViewScenarioWeaponInventory(scenarioWeapons, playerWeapons);
             Console.Clear();
-            ViewRoomOtherItemInventory(scenarioOtherItems, playerOtherItems);
+            ViewScenarioOtherItemInventory(scenarioOtherItems, playerOtherItems);
 
             Console.WriteLine("\nNo other items here seem particularly useful.\n");
             
@@ -354,6 +353,53 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
             Console.Beep(293, 125); // D Sixteenth
             Console.Beep(293, 125); // D Sixteenth
             Console.Beep(293, 125); // D Sixteenth
+        }
+
+        public static void DeathCard()
+        {
+            Console.WriteLine(@"
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMM        MMMMMMMMMMMM 
+MMMMMMMMMM            MMMMMMMMMM
+MMMMMMMMM              MMMMMMMMM
+MMMMMMMM    game        MMMMMMMM
+MMMMMMM       over      MMMMMMMM
+MMMMMMM                  MMMMMMM
+MMMMMMM                  MMMMMMM
+MMMMMMM    MMM    MMM    MMMMMMM
+MMMMMMM   MMMMM   MMMM   MMMMMMM 
+MMMMMMM   MMMMM   MMMM   MMMMMMM
+MMMMMMMM   MMMM M MMMM  MMMMMMMM
+MMMMMMMM        M        MMMMMMM
+MMMMMMMM       MMM      MMMMMMMM
+MMMMMMMMMMMM   MMM  MMMMMMMMMMMM
+MMMMMMMMMM MM       M  MMMMMMMMM
+MMMMMMMMMM  M M M M M MMMMMMMMMM
+MMMM  MMMMM MMMMMMMMM MMMMM   MM
+MMM    MMMM M MMMMM M MMMM    MM
+MMM    MMMM   M M M  MMMMM   MMM
+MMMM    MMMM         MMM      MM
+MMM       MMMM     MMMM       MM
+MMM         MMMMMMMM      M  MMM
+MMMM  MMM      MMM      MMMMMMMM
+MMMMMMMMMMM  MM       MMMMMMM  M
+MMM  MMMMMMM       MMMMMMMMM   M
+MM    MMM        MM            M
+MM            MMMM            MM
+MMM        MMMMMMMMMMMMM       M
+MM      MMMMMMMMMMMMMMMMMMM    M
+MMM   MMMMMMMMMMMMMMMMMMMMMM   M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+
+            Console.Beep(392, 500); // G Quarter
+            Console.Beep(349, 500); // F Quarter
+            Console.Beep(330, 500); // E Quarter
+            Console.Beep(293, 500); // D Quarter
+            Console.Beep(277, 250); // Db Eigth
+            Console.Beep(262, 250); // C Eigth
+            Console.Beep(247, 250); // B Eigth
+            Console.Beep(233, 250); // Bb Eigth
+            Console.Beep(220, 1000); // A Half
         }
         #endregion
     }
