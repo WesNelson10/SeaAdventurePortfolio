@@ -11,11 +11,13 @@ namespace AdventureLibrary
         public List<Weapon> WeaponInventory { get; set; }
         public List<OtherObject> OtherInventory { get; set; }
 
-        public PlayerPirate(string name, int life, int maxLife, int accuracy, int defense, bool isChat, PirateOption pirateOption, Weapon equippedWeapon, List<Weapon> weaponInventory) : base(name, life, maxLife, accuracy, defense, isChat)
+        public PlayerPirate(string name, int life, int maxLife, int accuracy, int defense, bool isChat, PirateOption pirateOption, Weapon equippedWeapon, List<Weapon> weaponInventory,
+            bool isFoeAlive) : base(name, life, maxLife, accuracy, defense, isChat)
         {
             PirateOption = PirateOption;
             EquippedWeapon = equippedWeapon;
             WeaponInventory = weaponInventory;
+            isFoeAlive = true;
 
             switch (PirateOption)
             {
@@ -34,7 +36,7 @@ namespace AdventureLibrary
 
         public override string ToString()
         {
-            return string.Format($"Pirate Name: {Name}\nPirate Type: {PirateOption}\nHealth: {Life}/{MaxLife}\nAccuracy: {CalcAccuracy()}% (Hit Chance)\nDefense: {Defense}% (Chance to evade an ememy attack)\nEquipped Weapon: {EquippedWeapon}");
+            return string.Format($"Pirate Name: {Name}\nPirate Type: {PirateOption}\nHealth: {Life}/{MaxLife}\nAccuracy: {CalcAccuracy()}% (Hit Chance)\nDefense: {Defense}% (Chance to evade an ememy attack)\nEquipped Weapon: {EquippedWeapon.Name}");
         }//end ToString
 
         public override int CalcAccuracy()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace AdventureLibrary
 {
@@ -310,7 +311,50 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
             ViewRoomOtherItemInventory(scenarioOtherItems, playerOtherItems);
 
             Console.WriteLine("\nNo other items here seem particularly useful.\n");
-            #endregion
+            
+
+
         }
+        #endregion
+
+        #region Console Beep
+        public static void SeaTheme()
+        {
+            Console.WriteLine(@"
+                            ______________________________________________
+       sea               .-'                     _                        '.
+       adventure       .'                       |-'                        |
+                     .'                         |                          |
+                  _.'               p         _\_/_         p              |
+               _.'                  |       .'  |  '.       |              |
+          __..'                     |      /    |    \      |              |
+    ___..'                         .T\    ======+======    /T.             |
+ ;;;\::::                        .' | \  /      |      \  / | '.           |
+ ;;;|::::                      .'   |  \/       |       \/  |   '.         |
+ ;;;/::::                    .'     |   \       |        \  |     '.       |
+       ''.__               .'       |    \      |         \ |       '.     |
+            ''._          <_________|_____>_____|__________>|_________>    |
+                '._     (___________|___________|___________|___________)  |
+                   '.    \;;o;;;o;;;o;;;;;o;;;;;o;;;;;o;;;;;o;;;;;o;;;;/   |
+                     '.~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~   |
+                       '. ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  |
+                         '-.______________________________________________.'
+");
+
+            Console.Beep(220, 500); // A Quarter
+            Console.Beep(293, 750); // D Dotted Quarter
+            Console.Beep(330, 250); // E Eigth
+            Console.Beep(349, 500); // F Quarter
+            Console.Beep(392, 500); // G Quarter
+            Console.Beep(349, 500); // F Quarter
+            Console.Beep(330, 500); // E Quarter
+            Console.Beep(293, 750); // D Dotted Quarter
+            Console.Beep(330, 250); // E Eighth
+            Console.Beep(262, 500); // C Quarter
+            Console.Beep(293, 125); // D Sixteenth
+            Console.Beep(293, 125); // D Sixteenth
+            Console.Beep(293, 125); // D Sixteenth
+        }
+        #endregion
     }
 }

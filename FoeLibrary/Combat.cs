@@ -16,7 +16,7 @@ namespace FoeLibrary
 
             if (result <= attacker.CalcAccuracy() - defender.CalcDefense())
             {
-                int damageDealt = attacker.CalcDamage(); //Might need ternary operator for future weapons for warrior class
+                int damageDealt = attacker.CalcDamage();
                 defender.Life -= damageDealt;
                 Display.Red($"{attacker.Name} hit {defender.Name} for {damageDealt} points of damage.");
             }//end if
@@ -34,5 +34,7 @@ namespace FoeLibrary
                 Attack(foe, player);
             }//end reply attack
         }//end battle
+
+        
     }
 }
