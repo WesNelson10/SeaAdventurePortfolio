@@ -12,7 +12,7 @@ namespace SeaAdventurePortfolio
     {
         static void Main(string[] args)
         {
-            bool exitAdventure = true;
+            bool exitAdventure = false;
             do
             {
                 Console.Title = "Sea Adventure";
@@ -28,7 +28,7 @@ namespace SeaAdventurePortfolio
 
                 #region Foes
                 Foe enemyPirate = new Foe("Enemy Pirate", 30, 30, 50, 4, true, "Although having a lot in common with you, they don't seem to want to talk about it.", 5, 9);
-                Foe kraken = new Foe("The Kraken", 100, 100, 30, 25, false, "This mighty beast strikes pure fear into your heart.", 15, 200);
+                Foe kraken = new Foe("Kraken", 50, 50, 20, 8, false, "This mighty beast strikes pure fear into your heart.", 10, 30);
                 Foe richGuy = new Foe("Rich Guy", 30, 30, 4, 3, false, "This man has earned his wealth through the exploitation of the laborers.", 4, 8);
                 #endregion
 
@@ -97,13 +97,13 @@ namespace SeaAdventurePortfolio
                 Scenario port = new Scenario("Port", "Home of your favorite drinkin' spot. Besides the ship, of course.", firstWeapon, someBread, false, false, false);
                 #endregion
 
-                List<Weapon> weaponInventory = new List<Weapon>(); // we don't have to specify the weapon right now.
-                List<OtherObject> otherInventory = new List<OtherObject>();
+                List<Weapon> weaponInventory = new List<Weapon>(firstWeapon); // we don't have to specify the weapon right now.
+                List<OtherObject> otherInventory = new List<OtherObject>(someBread);
 
                 PlayerPirate player = new PlayerPirate(playerName, 50, 50, 70, 5, false, chosenPirate, starterSword, weaponInventory, true);
 
                 //Port fight goes here
-                bool exitScenario = false;
+                //bool exitScenario = false;
                 bool exitBattle = false;
 
                 do
@@ -123,7 +123,7 @@ namespace SeaAdventurePortfolio
                     {
                         case ConsoleKey.D1:
                         case ConsoleKey.NumPad1:
-                            Combat.Battle(player, enemyPirate);
+                            Combat.Battle(player, enemy);
                             if (enemy.Life <= 0)
                             {
                                 Display.Green($"The {enemy.Name} died!");
@@ -176,7 +176,7 @@ namespace SeaAdventurePortfolio
                         {
                             case ConsoleKey.D1:
                             case ConsoleKey.NumPad1:
-                                Combat.Battle(player, kraken);
+                                Combat.Battle(player, enemy);
                                 if (enemy.Life <= 0)
                                 {
                                     Display.Green($"The {enemy.Name} died!");
@@ -216,9 +216,56 @@ namespace SeaAdventurePortfolio
                     //Land fight goes here
                     do
                     {
-                        //Combat Menu
+                        Foe enemy = richGuy;
+                        Display.Heal(player);
+                        Display.DisplayPort();
+                        Console.WriteLine("Arriving at port once more, you see a wealthy man attacking some citizens. You have healed to full health."); // TODO add port intro details
+                        Console.WriteLine($"Choose an Action:" +
+                                                    $"\n[1] Attack the {enemy.Name}" +
+                                                    $"\n[2] Chat" +
+                                                    $"\n[3] View Your Stats" +
+                                                    $"\n[4] View {enemy.Name}'s Stats" +
+                                                    $"\n[5] Access Your Inventory");
+                        ConsoleKey userChoice = Console.ReadKey(true).Key;
+                        Console.Clear();
+                        switch (userChoice)
+                        {
+                            case ConsoleKey.D1:
+                            case ConsoleKey.NumPad1:
+                                Combat.Battle(player, enemy);
+                                if (enemy.Life <= 0)
+                                {
+                                    Display.Green($"The {enemy.Name} died!");
+                                    exitBattle = true;
+                                    exitAdventure = true;
+                                }
+                                break;
 
-                    } while (player.Life > 0 && exitScenario);
+                            case ConsoleKey.D2:
+                            case ConsoleKey.NumPad2:
+                                Console.WriteLine("chatting");
+                                break;
+
+                            case ConsoleKey.D3:
+                            case ConsoleKey.NumPad3:
+                                Console.WriteLine(player);
+                                break;
+
+                            case ConsoleKey.D4:
+                            case ConsoleKey.NumPad4:
+                                Console.WriteLine(enemy);
+                                break;
+
+                            case ConsoleKey.D5:
+                            case ConsoleKey.NumPad5:
+                                Display.ViewPlayerInventory(player);
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                    } while (player.Life > 0 && exitBattle);
                 }
 
             } while (!exitAdventure);

@@ -21,8 +21,8 @@ namespace AdventureLibrary
                     Console.WriteLine($"{player.Life}/{player.MaxLife} health."
                     +
                     $"\n\n" +
-                    "[1] Weapons" +
-                    "[2] Other Items" +
+                    "[1] Weapons\n" +
+                    "[2] Other Items\n" +
                     "[3] Exit");
                     ConsoleKey choice = Console.ReadKey(true).Key;
 
@@ -74,14 +74,14 @@ namespace AdventureLibrary
                                 case ConsoleKey.NumPad1:
                                     Console.Clear();
                                     player.EquippedWeapon = weapon;
-                                    Console.WriteLine($"The {weapon} has been equipped.");
+                                    Console.WriteLine($"The {weapon.Name} has been equipped.");
                                     exitChoice = true;
                                     break;
 
                                 case ConsoleKey.D2:
                                 case ConsoleKey.NumPad2:
                                     Console.Clear();
-                                    Console.WriteLine($"The {weapon} has not been equipped.");
+                                    Console.WriteLine($"The {weapon.Name} has not been equipped.");
                                     exitChoice = true;
                                     break;
 
@@ -310,7 +310,7 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
             ViewScenarioOtherItemInventory(scenarioOtherItems, playerOtherItems);
 
             Console.WriteLine("\nNo other items here seem particularly useful.\n");
-            
+
 
 
         }
@@ -320,24 +320,22 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
         public static void SeaTheme()
         {
             Console.WriteLine(@"
-                            ______________________________________________
-       sea               .-'                     _                        '.
-       adventure       .'                       |-'                        |
-                     .'                         |                          |
-                  _.'               p         _\_/_         p              |
-               _.'                  |       .'  |  '.       |              |
-          __..'                     |      /    |    \      |              |
-    ___..'                         .T\    ======+======    /T.             |
- ;;;\::::                        .' | \  /      |      \  / | '.           |
- ;;;|::::                      .'   |  \/       |       \/  |   '.         |
- ;;;/::::                    .'     |   \       |        \  |     '.       |
-       ''.__               .'       |    \      |         \ |       '.     |
-            ''._          <_________|_____>_____|__________>|_________>    |
-                '._     (___________|___________|___________|___________)  |
-                   '.    \;;o;;;o;;;o;;;;;o;;;;;o;;;;;o;;;;;o;;;;;o;;;;/   |
-                     '.~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~   |
-                       '. ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  |
-                         '-.______________________________________________.'
+                            _                 _                   
+                           | |               | |                  
+ ___  ___  __ _    __ _  __| |_   _____ _ __ | |_ _   _ _ __ ___  
+/ __|/ _ \/ _` |  / _` |/ _` \ \ / / _ \ '_ \| __| | | | '__/ _ \ 
+\__ \  __/ (_| | | (_| | (_| |\ V /  __/ | | | |_| |_| | | |  __/ 
+|___/\___|\__,_|  \__,_|\__,_| \_/ \___|_| |_|\__|\__,_|_|  \___| 
+                                                                                              
+              |    |    |
+             )_)  )_)  )_)        
+            )___))___))___)\      wes nelson 2021
+           )____)____)_____)\\
+         _____|____|____|____\\\__
+---------\                   /---------
+  ^^^^^ ^^^^^^^^^^^^^^^^^^^^^
+    ^^^^      ^^^^     ^^^    ^^
+         ^^^^      ^^^       
 ");
 
             Console.Beep(220, 500); // A Quarter
@@ -358,38 +356,32 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
         public static void DeathCard()
         {
             Console.WriteLine(@"
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMM        MMMMMMMMMMMM 
-MMMMMMMMMM            MMMMMMMMMM
-MMMMMMMMM              MMMMMMMMM
-MMMMMMMM    game        MMMMMMMM
-MMMMMMM       over      MMMMMMMM
-MMMMMMM                  MMMMMMM
-MMMMMMM                  MMMMMMM
-MMMMMMM    MMM    MMM    MMMMMMM
-MMMMMMM   MMMMM   MMMM   MMMMMMM 
-MMMMMMM   MMMMM   MMMM   MMMMMMM
-MMMMMMMM   MMMM M MMMM  MMMMMMMM
-MMMMMMMM        M        MMMMMMM
-MMMMMMMM       MMM      MMMMMMMM
-MMMMMMMMMMMM   MMM  MMMMMMMMMMMM
-MMMMMMMMMM MM       M  MMMMMMMMM
-MMMMMMMMMM  M M M M M MMMMMMMMMM
-MMMM  MMMMM MMMMMMMMM MMMMM   MM
-MMM    MMMM M MMMMM M MMMM    MM
-MMM    MMMM   M M M  MMMMM   MMM
-MMMM    MMMM         MMM      MM
-MMM       MMMM     MMMM       MM
-MMM         MMMMMMMM      M  MMM
-MMMM  MMM      MMM      MMMMMMMM
-MMMMMMMMMMM  MM       MMMMMMM  M
-MMM  MMMMMMM       MMMMMMMMM   M
-MM    MMM        MM            M
-MM            MMMM            MM
-MMM        MMMMMMMMMMMMM       M
-MM      MMMMMMMMMMMMMMMMMMM    M
-MMM   MMMMMMMMMMMMMMMMMMMMMM   M
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
+███▀▀▀██┼███▀▀▀███┼███▀█▄█▀███┼██▀▀▀
+██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼█┼┼┼██┼██┼┼┼
+██┼┼┼▄▄▄┼██▄▄▄▄▄██┼██┼┼┼▀┼┼┼██┼██▀▀▀
+██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼┼┼┼┼██┼██┼┼┼
+███▄▄▄██┼██┼┼┼┼┼██┼██┼┼┼┼┼┼┼██┼██▄▄▄
+┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
+███▀▀▀███┼▀███┼┼██▀┼██▀▀▀┼██▀▀▀▀██▄┼
+██┼┼┼┼┼██┼┼┼██┼┼██┼┼██┼┼┼┼██┼┼┼┼┼██┼
+██┼┼┼┼┼██┼┼┼██┼┼██┼┼██▀▀▀┼██▄▄▄▄▄▀▀┼
+██┼┼┼┼┼██┼┼┼██┼┼█▀┼┼██┼┼┼┼██┼┼┼┼┼██┼
+███▄▄▄███┼┼┼─▀█▀┼┼─┼██▄▄▄┼██┼┼┼┼┼██▄
+┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼██┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼██┼┼┼┼┼┼┼┼┼
+┼┼┼┼┼┼████▄┼┼┼▄▄▄▄▄▄▄┼┼┼▄████┼┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼┼▀▀█▄█████████▄█▀▀┼┼┼┼┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼┼┼┼█████████████┼┼┼┼┼┼┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼┼┼┼██▀▀▀███▀▀▀██┼┼┼┼┼┼┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼┼┼┼██┼┼┼███┼┼┼██┼┼┼┼┼┼┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼┼┼┼█████▀▄▀█████┼┼┼┼┼┼┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼┼┼┼┼███████████┼┼┼┼┼┼┼┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼▄▄▄██┼┼█▀█▀█┼┼██▄▄▄┼┼┼┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼▀▀██┼┼┼┼┼┼┼┼┼┼┼██▀▀┼┼┼┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼┼┼▀▀┼┼┼┼┼┼┼┼┼┼┼▀▀┼┼┼┼┼┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
+");
 
             Console.Beep(392, 500); // G Quarter
             Console.Beep(349, 500); // F Quarter
@@ -401,6 +393,25 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
             Console.Beep(233, 250); // Bb Eigth
             Console.Beep(220, 1000); // A Half
         }
+
+        public static void WinCard()
+        {
+            Console.WriteLine(@"
+██    ██  ██████  ██    ██     ██     ██ ██ ███    ██ 
+ ██  ██  ██    ██ ██    ██     ██     ██ ██ ████   ██ 
+  ████   ██    ██ ██    ██     ██  █  ██ ██ ██ ██  ██ 
+   ██    ██    ██ ██    ██     ██ ███ ██ ██ ██  ██ ██ 
+   ██     ██████   ██████       ███ ███  ██ ██   ████                                                     
+");
+        }
+        #endregion
+
+        #region Heal Method
+        public static void Heal(Being being)
+        {
+            being.Life = being.MaxLife;
+        }
+        
         #endregion
     }
 }
