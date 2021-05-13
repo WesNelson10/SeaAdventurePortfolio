@@ -19,7 +19,7 @@ namespace AdventureLibrary
         // Override here
         public override string ToString()
         {
-            return String.Format($"Object: {Name}/nDescription: {Description}");
+            return string.Format($"Object: {Name}/nDescription: {Description}");
         }
     }
 }

@@ -114,13 +114,44 @@ namespace AdventureLibrary
                                     Console.Clear();
                                     Console.WriteLine($"You examine the {@object.Name}: " +
                                         $"\n{@object.Description}");
+                                    if (@object.Name == "Bread")
+                                    {
+                                        Console.WriteLine("\nDo you want to eat the bread?\n" +
+                                            "[1] Yes\n[2] No");
+                                        ConsoleKey breadChoice = Console.ReadKey(true).Key;
+                                        bool inLoop = true;
+                                        do
+                                        {
+                                            switch (breadChoice)
+                                            {
+                                                case ConsoleKey.D1:
+                                                case ConsoleKey.NumPad1:
+                                                    Console.Clear();
+                                                    EatBread(player);
+                                                    inLoop = false;
+                                                    break;
+
+                                                case ConsoleKey.D2:
+                                                case ConsoleKey.NumPad2:
+                                                    Console.Clear();
+                                                    Console.WriteLine("Savin' that bread for later.");
+                                                    inLoop = false;
+                                                    break;
+
+                                                default:
+                                                    Console.Clear();
+                                                    Console.WriteLine($"{breadChoice} is not a valid option. Try again.");
+                                                    break;
+                                            }
+                                        } while (inLoop);
+                                    }
                                     exitChoice = true;
                                     break;
 
                                 case ConsoleKey.D2:
                                 case ConsoleKey.NumPad2:
                                     Console.Clear();
-                                    Console.WriteLine($"You leave the {@object.Name} in your pack");
+                                    Console.WriteLine($"You leave the {@object.Name}.");
                                     exitChoice = true;
                                     break;
 
@@ -156,7 +187,7 @@ namespace AdventureLibrary
         #endregion
 
         #region Ascii Art
-        public static void DisplayPort()// lol, displayport
+        public static void DisplayPort()// lol
         {
             string portAscii = @"
                               ___        ___       T__
@@ -166,155 +197,200 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
 ";
             Console.WriteLine(portAscii);
         }
-        #endregion
-
-        #region Scenario Objects
-
-        public static void ViewScenarioWeaponInventory(List<Weapon> inputInventory, List<Weapon> playerInventory)
+        public static void DisplayKraken()
         {
-            bool exitLoop = false;
-            do
-            {
-                Console.WriteLine("Searching for items...");
-                List<Weapon> weaponsToRemove = new List<Weapon>();
-                foreach (Weapon item in inputInventory)
-                {
-                    bool exitItemChoice = false;
-                    do
-                    {
-
-                        Console.WriteLine($"You found: {item.Name}\n" +
-                            $"[1] Examine {item.Name}\n" +
-                            $"[2] Take {item.Name}\n" +
-                            $"[3] Leave {item.Name} where it is");
-                        ConsoleKey userChoice = Console.ReadKey(true).Key;
-
-                        switch (userChoice)
-                        {
-                            case ConsoleKey.D1:
-                            case ConsoleKey.NumPad1:
-                                Console.Clear();
-                                Console.WriteLine("You examine the item: " +
-                                    $"\n{item.Description}" +
-                                    $"\nChoose whether to take or leave it.");
-                                break;
-
-                            case ConsoleKey.D2:
-                            case ConsoleKey.NumPad2:
-                                Console.Clear();
-                                playerInventory.Add(item);
-                                Console.WriteLine($"{item.Name} added to your inventory.");
-                                weaponsToRemove.Add(item);
-                                exitItemChoice = true;
-                                break;
-
-                            case ConsoleKey.D3:
-                            case ConsoleKey.NumPad3:
-                                Console.Clear();
-                                Console.WriteLine($"You leave the {item.Name} where it is.");
-                                exitItemChoice = true;
-                                break;
-
-                            default:
-                                Console.Clear();
-                                Console.WriteLine($"{userChoice} was not a valid option, please choose again");
-                                break;
-                        }//end switch
-
-                    } while (!exitItemChoice);
-
-                }//end foreach item loop
-                foreach (Weapon item in weaponsToRemove)
-                {
-                    inputInventory.Remove(item);
-                }//end removal foreach
-                exitLoop = true;
-            } while (!exitLoop);
-        }//end
-
-        public static void ViewScenarioOtherItemInventory(List<OtherObject> inputInventory, List<OtherObject> playerInventory)
+            string krakenAscii = @"
+        ___
+       / o \
+  __   \   /   _
+    \__/ | \__/ \
+   \___//|\\___/\
+    ___/ | \___ 
+         |     \
+        /                        
+";
+            Console.WriteLine(krakenAscii);
+        }
+        public static void DisplaySea()
         {
-            List<OtherObject> itemsToRemove = new List<OtherObject>();
-            bool exitLoop = false;
-            do
-            {
-                Console.WriteLine("You search for any useable items: " +
-                    "\n(Items may be equipped, read, or used from your inventory screen)\n");
-
-                foreach (OtherObject @object in inputInventory)
-                {
-                    bool exitItemChoice = false;
-                    do
-                    {
-
-                        Console.WriteLine($"You found: {@object.Name}\n" +
-                            $"[1] Examine {@object.Name}\n" +
-                            $"[2] Take {@object.Name}\n" +
-                            $"[3] Leave {@object.Name} where it is");
-                        ConsoleKey userChoice = Console.ReadKey(true).Key;
-
-                        switch (userChoice)
-                        {
-                            case ConsoleKey.D1:
-                            case ConsoleKey.NumPad1:
-                                Console.Clear();
-                                Console.WriteLine("You examine the item: " +
-                                    $"\n{@object.Description}" +
-                                    $"\nChoose whether to take or leave it.");
-                                break;
-
-                            case ConsoleKey.D2:
-                            case ConsoleKey.NumPad2:
-                                Console.Clear();
-                                playerInventory.Add(@object);
-                                Console.WriteLine($"{@object.Name} added to your inventory.");
-                                itemsToRemove.Add(@object);
-                                exitItemChoice = true;
-                                break;
-
-                            case ConsoleKey.D3:
-                            case ConsoleKey.NumPad3:
-                                Console.Clear();
-                                Console.WriteLine($"You leave the {@object.Name} where it is.");
-                                exitItemChoice = true;
-                                break;
-
-                            default:
-                                Console.Clear();
-                                Console.WriteLine($"{userChoice} was not a valid option, please choose again");
-                                break;
-                        }//end switch
-
-                    } while (!exitItemChoice);
-
-                }//end foreach item loop
-                foreach (OtherObject item in itemsToRemove)
-                {
-                    inputInventory.Remove(item);
-                }//end removal foreach
-                exitLoop = true;
-            } while (!exitLoop);
+            string seaAscii = @"
+_-=-__    \_/
+(______)  -(_)-  ,;,
+           / \   _|__
+~~~~~~~~~~~~~~~~(____
+~~~  ~  -+-  ~~ ~ ~
+  ---*--(_)--*---
+ ~~~   /   \   ~ ~~
+~ ~ ~ U-----U ~ ~ ~
+~~~ ~`'`~~~`'`~~ ~~
+~ ~~~/ \~~~/ \~~~ ~
+";
+            Console.WriteLine(seaAscii);
+        }
+        public static void DisplayIsland()
+        {
+            string island = @"
+                                                    ____
+                                         v        _(    )
+        _ ^ _                          v         (___(__)
+       '_\V/ `                             v
+       ' oX`
+          X                           
+          X             
+          X                                                                                                     
+          X                                           cool,      (_( (_(
+          X.a##a.[chest]                             a chest.   (___(___(
+       .aa##############a.>>                                    __|___|___
+    .a######################aa.                                 \        /
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+";
+            Console.WriteLine(island);
+        }
+        public static void DisplayEnemyShip()
+        {
+            string enemyShip = @"
+    __|__ |___| |\
+    |o__| |___| | \    we want
+    |___| |___| |o \  your stuff   
+   _|___| |___| |__o\
+  /...\_____|___|____\_/
+  \   o * o * * o o  /
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+";
+            Console.WriteLine(enemyShip);
         }
 
-        public static void ViewScenarioInventory(PlayerPirate player, Scenario scenario)
-        {
-            // Whole Scenario Inventory
-            List<Weapon> playerWeapons = player.WeaponInventory;
-            List<OtherObject> playerOtherItems = player.OtherInventory;
-            List<Weapon> scenarioWeapons = scenario.ScenarioDrop;
-            List<OtherObject> scenarioOtherItems = scenario.OtherDrop;
-
-            Console.Clear();
-            ViewScenarioWeaponInventory(scenarioWeapons, playerWeapons);
-            Console.Clear();
-            ViewScenarioOtherItemInventory(scenarioOtherItems, playerOtherItems);
-
-            Console.WriteLine("\nNo other items here seem particularly useful.\n");
-
-
-
-        }
         #endregion
+
+        //#region Scenario Objects
+
+        //public static void ViewScenarioWeaponInventory(List<Weapon> inputInventory, List<Weapon> playerInventory)
+        //{
+        //    bool exitLoop = false;
+        //    do
+        //    {
+        //        Console.WriteLine("Searching for items...");
+        //        List<Weapon> weaponsToRemove = new List<Weapon>();
+        //        foreach (Weapon item in inputInventory)
+        //        {
+        //            bool exitItemChoice = false;
+        //            do
+        //            {
+
+        //                Console.WriteLine($"You found: {item.Name}\n" +
+        //                    $"[1] Examine {item.Name}\n" +
+        //                    $"[2] Take {item.Name}\n" +
+        //                    $"[3] Leave {item.Name} where it is");
+        //                ConsoleKey userChoice = Console.ReadKey(true).Key;
+
+        //                switch (userChoice)
+        //                {
+        //                    case ConsoleKey.D1:
+        //                    case ConsoleKey.NumPad1:
+        //                        Console.Clear();
+        //                        Console.WriteLine("You examine the item: " +
+        //                            $"\n{item.Description}" +
+        //                            $"\nChoose whether to take or leave it.");
+        //                        break;
+
+        //                    case ConsoleKey.D2:
+        //                    case ConsoleKey.NumPad2:
+        //                        Console.Clear();
+        //                        playerInventory.Add(item);
+        //                        Console.WriteLine($"{item.Name} added to your inventory.");
+        //                        weaponsToRemove.Add(item);
+        //                        exitItemChoice = true;
+        //                        break;
+
+        //                    case ConsoleKey.D3:
+        //                    case ConsoleKey.NumPad3:
+        //                        Console.Clear();
+        //                        Console.WriteLine($"You leave the {item.Name} where it is.");
+        //                        exitItemChoice = true;
+        //                        break;
+
+        //                    default:
+        //                        Console.Clear();
+        //                        Console.WriteLine($"{userChoice} was not a valid option, please choose again");
+        //                        break;
+        //                }//end switch
+
+        //            } while (!exitItemChoice);
+
+        //        }//end foreach item loop
+        //        foreach (Weapon item in weaponsToRemove)
+        //        {
+        //            inputInventory.Remove(item);
+        //        }//end removal foreach
+        //        exitLoop = true;
+        //    } while (!exitLoop);
+        //}//end
+
+        //public static void ViewScenarioOtherItemInventory(List<OtherObject> inputInventory, List<OtherObject> playerInventory)
+        //{
+        //    List<OtherObject> itemsToRemove = new List<OtherObject>();
+        //    bool exitLoop = false;
+        //    do
+        //    {
+        //        Console.WriteLine("You search for any useable items: " +
+        //            "\n(Items may be equipped, read, or used from your inventory screen)\n");
+
+        //        foreach (OtherObject @object in inputInventory)
+        //        {
+        //            bool exitItemChoice = false;
+        //            do
+        //            {
+
+        //                Console.WriteLine($"You found: {@object.Name}\n" +
+        //                    $"[1] Examine {@object.Name}\n" +
+        //                    $"[2] Take {@object.Name}\n" +
+        //                    $"[3] Leave {@object.Name} where it is");
+        //                ConsoleKey userChoice = Console.ReadKey(true).Key;
+
+        //                switch (userChoice)
+        //                {
+        //                    case ConsoleKey.D1:
+        //                    case ConsoleKey.NumPad1:
+        //                        Console.Clear();
+        //                        Console.WriteLine("You examine the item: " +
+        //                            $"\n{@object.Description}" +
+        //                            $"\nChoose whether to take or leave it.");
+        //                        break;
+
+        //                    case ConsoleKey.D2:
+        //                    case ConsoleKey.NumPad2:
+        //                        Console.Clear();
+        //                        playerInventory.Add(@object);
+        //                        Console.WriteLine($"{@object.Name} added to your inventory.");
+        //                        itemsToRemove.Add(@object);
+        //                        exitItemChoice = true;
+        //                        break;
+
+        //                    case ConsoleKey.D3:
+        //                    case ConsoleKey.NumPad3:
+        //                        Console.Clear();
+        //                        Console.WriteLine($"You leave the {@object.Name} where it is.");
+        //                        exitItemChoice = true;
+        //                        break;
+
+        //                    default:
+        //                        Console.Clear();
+        //                        Console.WriteLine($"{userChoice} was not a valid option, please choose again");
+        //                        break;
+        //                }//end switch
+
+        //            } while (!exitItemChoice);
+
+        //        }//end foreach item loop
+        //        foreach (OtherObject item in itemsToRemove)
+        //        {
+        //            inputInventory.Remove(item);
+        //        }//end removal foreach
+        //        exitLoop = true;
+        //    } while (!exitLoop);
+        //}
+
+        //#endregion
 
         #region Console Beep
         public static void SeaTheme()
@@ -403,15 +479,23 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
    ██    ██    ██ ██    ██     ██ ███ ██ ██ ██  ██ ██ 
    ██     ██████   ██████       ███ ███  ██ ██   ████                                                     
 ");
+            Console.Beep(293, 500);
+            Console.Beep(330, 750);
+            Console.Beep(293, 250);
+            Console.Beep(440, 1000);
         }
         #endregion
 
-        #region Heal Method
+        #region Healing Methods
         public static void Heal(Being being)
         {
             being.Life = being.MaxLife;
         }
-        
-        #endregion
+        public static void EatBread(PlayerPirate player)
+        {
+            player.Life += 5;
+            Console.WriteLine("You ate some bread.");
+        }
+        #endregion      
     }
 }

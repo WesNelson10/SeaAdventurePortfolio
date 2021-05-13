@@ -21,7 +21,7 @@ namespace AdventureLibrary
         //ToString()
         public override string ToString()
         {
-            return String.Format(base.ToString() + $"Weapon Accuracy Modifier: {AccuracyMod}%\nDamage: {MinDamage} to {MaxDamage}");
+            return string.Format($"Weapon Accuracy Modifier: {AccuracyMod}%\nDamage: {MinDamage} to {MaxDamage}");
         }
     }
 }

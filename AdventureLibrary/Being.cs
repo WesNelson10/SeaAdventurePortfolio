@@ -37,7 +37,7 @@ namespace AdventureLibrary
             Accuracy = accuracy;
             Defense = defense;
             IsChat = isChat;
-        }//end Full and Qualified
+        }//end
 
         public virtual int CalcDefense()
         {

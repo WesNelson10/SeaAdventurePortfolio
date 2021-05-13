@@ -15,7 +15,7 @@ namespace AdventureLibrary
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format($"Item: {Name}\n{Description}\nAvailability: {IsAvailable}");
         }
     }
 }
