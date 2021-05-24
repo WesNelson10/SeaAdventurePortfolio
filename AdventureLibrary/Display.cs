@@ -127,7 +127,7 @@ namespace AdventureLibrary
                                                 case ConsoleKey.D1:
                                                 case ConsoleKey.NumPad1:
                                                     Console.Clear();
-                                                    EatBread(player);
+                                                    EatBread(player);                                                    
                                                     inLoop = false;
                                                     break;
 
@@ -175,7 +175,7 @@ namespace AdventureLibrary
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine(input);
             Console.ResetColor();
-
+            // All this happens when we pass a string through this method.
         }
 
         public static void Green(string input)

@@ -21,7 +21,7 @@ namespace SeaAdventurePortfolio
 
             do
             {
-                Console.Title = "Sea Adventure";
+                Console.Title = "Sea Adventure";  
                 Display.SeaTheme(); // custom title card and song
 
                 #region Weapons and Objects
@@ -118,19 +118,17 @@ namespace SeaAdventurePortfolio
 
                 #region Chats
                 List<Chat> chats = new List<Chat>();
-                Chat port1 = new Chat("Taking offense to your diplomacy, the pirate lunges out and strikes you with someone's detached peg leg.");
-                Chat port2 = new Chat("rererererere");
-                Chat port3 = new Chat("adadadadadad");
-                Chat port4 = new Chat("sejsejsejsej");
-                Chat port5 = new Chat("fffffffffff");
+                Chat port1 = new Chat("Taking offense to your diplomacy, the enemy lunges out and strikes you with someone's detached peg leg.");
+                Chat port2 = new Chat("The enemy seems amused by your attempt at reasoning.");
+                Chat port3 = new Chat("The enemy lowers his guard for a moment, allowing you to do extra damage.");
+                Chat port4 = new Chat("The enemy is not thrown off by your words.");
+                Chat port5 = new Chat("Your chat did nothing.");
                 chats.Add(port1);
                 chats.Add(port2);
-                chats.Add(port3);
+                chats.Add(port3); // manually adding, could refactor to use collection initialization syntax
                 chats.Add(port4);
                 chats.Add(port5);
                 Random rand = new Random();
-                int r = rand.Next(0, chats.Count);
-                System.Threading.Thread.Sleep(35);
                 #endregion
 
                 PlayerPirate player = new PlayerPirate(playerName, 50, 50, 70, 5, false, killCount, chosenPirate, starterSword, weapons, others, true); // global player
@@ -174,8 +172,19 @@ namespace SeaAdventurePortfolio
 
                         case ConsoleKey.D2:
                         case ConsoleKey.NumPad2:
-                            Console.WriteLine(chats.Count);
+                            int r = rand.Next(0, chats.Count);
+                            System.Threading.Thread.Sleep(50);
                             Console.WriteLine(chats[r]);
+                            if (chats[r].Message == "The enemy lowers his guard for a moment, allowing you to do extra damage.")
+                            {
+                                Display.Green("Max Damage Increased!");
+                                player.EquippedWeapon.MaxDamage += 2;
+                            }
+                            if (chats[r].Message == "Taking offense to your diplomacy, the enemy lunges out and strikes you with someone's detached peg leg.")
+                            {
+                                Display.Red("Hit for 2 damage...");
+                                player.Life -= 2;
+                            }
                             break;
 
                         case ConsoleKey.D3:
@@ -253,7 +262,19 @@ namespace SeaAdventurePortfolio
 
                             case ConsoleKey.D2:
                             case ConsoleKey.NumPad2:
-                                Console.WriteLine("chatting");
+                                int q = rand.Next(0, chats.Count);
+                                System.Threading.Thread.Sleep(50);
+                                Console.WriteLine(chats[q]);
+                                if (chats[q].Message == "The enemy lowers his guard for a moment, allowing you to do extra damage.")
+                                {
+                                    Display.Green("Max Damage Increased!");
+                                    player.EquippedWeapon.MaxDamage += 2;
+                                }
+                                if (chats[q].Message == "Taking offense to your diplomacy, the enemy lunges out and strikes you with someone's detached peg leg.")
+                                {
+                                    Display.Red("Hit for 2 damage...");
+                                    player.Life -= 2;
+                                }
                                 break;
 
                             case ConsoleKey.D3:
@@ -332,7 +353,19 @@ namespace SeaAdventurePortfolio
 
                             case ConsoleKey.D2:
                             case ConsoleKey.NumPad2:
-                                Console.WriteLine("chatting");
+                                int x = rand.Next(0, chats.Count);
+                                System.Threading.Thread.Sleep(50);
+                                Console.WriteLine(chats[x]);
+                                if (chats[x].Message == "The enemy lowers his guard for a moment, allowing you to do extra damage.")
+                                {
+                                    Display.Green("Max Damage Increased!");
+                                    player.EquippedWeapon.MaxDamage += 2;
+                                }
+                                if (chats[x].Message == "Taking offense to your diplomacy, the enemy lunges out and strikes you with someone's detached peg leg.")
+                                {
+                                    Display.Red("Hit for 6 damage...");
+                                    player.Life -= 6;
+                                }
                                 break;
 
                             case ConsoleKey.D3:
@@ -410,7 +443,19 @@ namespace SeaAdventurePortfolio
 
                             case ConsoleKey.D2:
                             case ConsoleKey.NumPad2:
-                                Console.WriteLine("chatting");
+                                int y = rand.Next(0, chats.Count);
+                                System.Threading.Thread.Sleep(50);
+                                Console.WriteLine(chats[y]);
+                                if (chats[y].Message == "The enemy lowers his guard for a moment, allowing you to do extra damage.")
+                                {
+                                    Display.Green("Max Damage Increased!");
+                                    player.EquippedWeapon.MaxDamage += 2;
+                                }
+                                if (chats[y].Message == "Taking offense to your diplomacy, the enemy lunges out and strikes you with someone's detached peg leg.")
+                                {
+                                    Display.Red("Hit for 10 damage...");
+                                    player.Life -= 10;
+                                }
                                 break;
 
                             case ConsoleKey.D3:
@@ -450,12 +495,12 @@ namespace SeaAdventurePortfolio
             //Closing sequence
             if (lostGame)
             {
-                Console.WriteLine("Kill Count: " + killCount);
+                Console.WriteLine("Final Score: " + killCount);
                 Display.DeathCard();
             }
             else
             {
-                Console.WriteLine("Kill Count: " + killCount);
+                Console.WriteLine("Final Score: " + killCount);
                 Display.WinCard();
             }
 
